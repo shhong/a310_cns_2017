@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Sungho Hong" />
+  <title>Lightning Introduction to Python</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" type="text/css" media="screen, projection, print"
+    href="http://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css" />
+  <script src="http://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js"
+    charset="utf-8" type="text/javascript"></script>
+</head>
+<body>
+<div class="slide titlepage">
+  <h1 class="title">Lightning Introduction to Python</h1>
+  <p class="author">
+Sungho Hong (De Schutter unit, OIST)
+  </p>
+  <p class="date">Computational Neuroscience course (A310), 2016/2017 at OIST</p>
+</div>
+<div id="variables" class="slide section level1">
+<h1>Variables</h1>
+<p>Python is a dynamic language and any variable can be created and assigned without declaration.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">a <span class="op">=</span> <span class="dv">2</span>    <span class="co"># define a</span>
+b <span class="op">=</span> a
+a <span class="op">*=</span> b   <span class="co"># a==???</span>
+b <span class="op">=</span> <span class="st">&#39;now for something completely different.&#39;</span>
+a <span class="op">*=</span> b   <span class="co"># a==???</span>
+<span class="kw">del</span>(a, b)</code></pre></div>
+<h3 id="beware-of-types">Beware of types!</h3>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">a, b <span class="op">=</span> <span class="dv">1</span>, <span class="dv">2</span>
+<span class="bu">print</span> a, b, a<span class="op">/</span>b
+<span class="bu">print</span> a<span class="op">/</span><span class="bu">float</span>(b)</code></pre></div>
+</div>
+<div id="indents" class="slide section level1">
+<h1>Indents</h1>
+<p>Code blocks are defined by the fixed indents followed by <strong>:</strong>. For example, indent the codes in conditionals,</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="cf">if</span> <span class="va">True</span>:
+    <span class="bu">print</span> <span class="st">&quot;True&quot;</span>
+    <span class="bu">print</span> <span class="st">&quot;To be precise, that was True&quot;</span>
+<span class="cf">else</span>:
+    <span class="bu">print</span> <span class="st">&quot;False&quot;</span></code></pre></div>
+<p>in loops,</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="cf">for</span> x <span class="op">in</span> <span class="bu">range</span>(<span class="dv">6</span>):
+    <span class="bu">print</span> x</code></pre></div>
+<p>or when you define functions</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> f(x):
+    y <span class="op">=</span> x <span class="op">+</span> <span class="dv">1</span>
+    <span class="cf">return</span> y</code></pre></div>
+</div>
+<div id="controlling-the-flow" class="slide section level1">
+<h1>Controlling the flow</h1>
+<p>With <code>if ... else ...</code>, use <code>and</code>, <code>or</code>, and <code>not</code>:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">simulator <span class="op">=</span> <span class="st">&quot;Nest&quot;</span>
+language <span class="op">=</span> <span class="st">&quot;Python&quot;</span>
+
+<span class="cf">if</span> simulator<span class="op">==</span><span class="st">&quot;Nest&quot;</span> <span class="op">and</span> language<span class="op">==</span><span class="st">&quot;Python&quot;</span>:
+    <span class="bu">print</span> <span class="st">&quot;A Nest simulation written in Python.&quot;</span>
+
+<span class="cf">if</span> simulator<span class="op">!=</span><span class="st">&quot;Nest&quot;</span>:
+    <span class="bu">print</span> <span class="st">&quot;Not a Nest simulation.&quot;</span>
+
+<span class="cf">if</span> <span class="op">not</span> language<span class="op">==</span><span class="st">&quot;Python&quot;</span>:
+    <span class="bu">print</span> <span class="st">&quot;Not written in Python.&quot;</span></code></pre></div>
+<p>You can make loops with <code>for</code> or <code>while</code>.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">j <span class="op">=</span> <span class="dv">0</span>
+<span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="dv">10</span>):
+    j <span class="op">+=</span> i
+    <span class="bu">print</span> i, j</code></pre></div>
+</div>
+<div id="functions-and-how-to-call-them" class="slide section level1">
+<h1>Functions and how to call them</h1>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> f(x, y):
+    <span class="cf">return</span> x</code></pre></div>
+<p>Then, try (one of them causes an error!)</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">f(<span class="dv">1</span>, <span class="dv">2</span>)
+f(x<span class="op">=</span><span class="dv">1</span>, y<span class="op">=</span><span class="dv">2</span>)
+f(y<span class="op">=</span><span class="dv">2</span>, x<span class="op">=</span><span class="dv">1</span>)
+f(x<span class="op">=</span><span class="dv">2</span>, <span class="dv">2</span>)</code></pre></div>
+<p>The default values can be also specified:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> f(x, y<span class="op">=</span><span class="dv">2</span>):
+    <span class="cf">return</span> x<span class="op">+</span>y</code></pre></div>
+<p>Try</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">f(<span class="dv">1</span>)
+f(<span class="dv">1</span>, y<span class="op">=</span><span class="dv">3</span>)</code></pre></div>
+<p>The functions can be called with data structures such as lists and dictionaries.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">f(<span class="op">*</span>[<span class="dv">1</span>, <span class="dv">2</span>])
+f(<span class="op">**</span>{<span class="st">&#39;x&#39;</span>: <span class="dv">1</span>, <span class="st">&#39;y&#39;</span>: <span class="dv">7</span>})</code></pre></div>
+</div>
+<div class="slide section level1">
+
+<h3 id="help-strings">Help strings</h3>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> f(x, y):
+   <span class="co">&quot;&quot;&quot; f(x, y) returns the sum of x and y.&quot;&quot;&quot;</span>
+   <span class="cf">return</span> x<span class="op">+</span>y</code></pre></div>
+<p>Then, try</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">help</span>(f)</code></pre></div>
+<p>Try also other functions that we have seen such as</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">help</span>(<span class="bu">range</span>)</code></pre></div>
+<p>and</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">help</span>(<span class="st">&#39;in&#39;</span>)</code></pre></div>
+</div>
+<div id="namespaces" class="slide section level1">
+<h1>Namespaces</h1>
+<p>In Python, every file is considered as a <em>module</em> with its own namespace. For example, let's say you have <code>mymodule.py</code> as</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co">Here you write a module help. Try help(mymodule) after importing.</span>
+<span class="co">&quot;&quot;&quot;</span>
+
+<span class="kw">def</span> func1():
+    <span class="co">&quot;&quot;&quot; Help for func1. &quot;&quot;&quot;</span>
+    <span class="bu">print</span> <span class="st">&quot;You called func1!&quot;</span></code></pre></div>
+<p>You can call <code>func1</code> as</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> mymodule
+mymodule.func1()</code></pre></div>
+<p>or with an alias,</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> mymodule <span class="im">as</span> m
+m.func1()</code></pre></div>
+<p>or import the function directly first</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> mymodule <span class="im">import</span> func1
+func1()</code></pre></div>
+<p>But use the following method <strong>only when you know what you are doing!</strong></p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> mymodule <span class="im">import</span> <span class="op">*</span>
+func1()</code></pre></div>
+</div>
+<div class="slide section level1">
+
+<p>A directory can be a module too if it has <code>__init__.py</code>. Typically, you have:</p>
+<p><code>mymodule/__init__.py</code></p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co">Module help</span>
+<span class="co">&quot;&quot;&quot;</span>
+
+<span class="im">import</span> submodule1</code></pre></div>
+<p><code>mymodule/submodule1.py</code></p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co">Submodule help</span>
+<span class="co">&quot;&quot;&quot;</span>
+
+<span class="kw">def</span> func1():...</code></pre></div>
+<p>Then, <code>func1</code> can be called as</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> mymodule
+
+mymodule.submodule1.func1()</code></pre></div>
+<p>Or you can use aliasing, too.</p>
+</div>
+<div id="data-types" class="slide section level1">
+<h1>Data types</h1>
+<h2 id="lists">Lists</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">a <span class="op">=</span> <span class="bu">range</span>(<span class="dv">6</span>)              <span class="co"># a ==?</span>
+a.append(<span class="dv">6</span>)     <span class="co"># You can append elements...</span>
+a.append(<span class="st">&#39;J&#39;</span>)   <span class="co"># of different types...</span>
+a.remove(<span class="dv">3</span>)     <span class="co"># and remove them, too.</span>
+
+<span class="dv">3</span> <span class="op">in</span> a                    <span class="co"># Test if it has a particular element.</span>
+<span class="cf">for</span> x <span class="op">in</span> a: <span class="bu">print</span> x<span class="op">**</span><span class="dv">2</span>,   <span class="co"># Loop around elements in the list.</span>
+
+a[<span class="dv">3</span>]
+a[<span class="dv">1</span>:<span class="dv">5</span>]    <span class="co"># Access a range of elements.</span>
+a[<span class="op">-</span><span class="dv">1</span>]     <span class="co"># You can also index from the end.</span></code></pre></div>
+</div>
+<div class="slide section level1">
+
+<h2 id="tuples">Tuples</h2>
+<p>The tuple is similar to the list but is immutable.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">a <span class="op">=</span> (<span class="dv">1</span>, <span class="dv">2</span>)
+<span class="dv">3</span> <span class="op">in</span> a       <span class="co"># Test if it has the particular element.</span>
+
+a <span class="op">=</span> <span class="dv">1</span>, <span class="dv">2</span>     <span class="co"># a == ???</span>
+a, b <span class="op">=</span> <span class="dv">1</span>, <span class="dv">2</span>  <span class="co"># a == ??? We have seen this before.</span>
+
+<span class="kw">def</span> f():
+    <span class="cf">return</span> <span class="dv">1</span>, <span class="dv">2</span>
+
+x <span class="op">=</span> f()     <span class="co"># x==???</span>
+x, y <span class="op">=</span> f()  <span class="co"># x==???</span></code></pre></div>
+</div>
+<div class="slide section level1">
+
+<h2 id="dictionaries">Dictionaries</h2>
+<p>The dictionary is a convenient data structure providing key/value access.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">p <span class="op">=</span> {<span class="st">&#39;type&#39;</span>: <span class="st">&#39;pyr&#39;</span>, <span class="st">&#39;rate&#39;</span>: <span class="fl">1.0</span>, <span class="st">&#39;number&#39;</span>: <span class="dv">1000</span>}
+p[<span class="st">&#39;type&#39;</span>]
+<span class="co">&#39;type&#39;</span> <span class="op">in</span> p    <span class="co"># Check if the dict has a particular **key**</span></code></pre></div>
+</div>
+<div id="classes-and-objects" class="slide section level1">
+<h1>Classes and objects</h1>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">c <span class="op">=</span> Cell(cell_type<span class="op">=</span><span class="st">&#39;pyr&#39;</span>)
+c.cell_type                    <span class="co"># Call attributes.</span>
+c.add_patch_electrode(<span class="st">&#39;soma&#39;</span>)  <span class="co"># Call methods.</span></code></pre></div>
+<p>The classes are defined as</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> Cell(<span class="bu">object</span>):
+    <span class="co">&quot;&quot;&quot; Class help &quot;&quot;&quot;</span>
+    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, cell_type):
+        <span class="va">self</span>.cell_type <span class="op">=</span> cell_type
+
+    <span class="kw">def</span> add_patch_electrode(<span class="va">self</span>, location):
+        <span class="cf">raise</span> <span class="pp">NotImplementedError</span>(<span class="st">&#39;This part is not implemented yet.&#39;</span>)</code></pre></div>
+<p>(Note <strong><code>self</code></strong> in the method definitions)</p>
+</div>
+<div class="slide section level1">
+
+<p>You can also subclass other classes as</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> CellList(<span class="bu">list</span>):
+    <span class="co">&quot;&quot;&quot; Need help &quot;&quot;&quot;</span>
+    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):
+        <span class="va">self</span>.size <span class="op">=</span> <span class="bu">len</span>(<span class="va">self</span>)
+
+    <span class="kw">def</span> append(<span class="va">self</span>, cell):
+        <span class="bu">super</span>(CellList, <span class="va">self</span>).append(cell)
+        <span class="bu">print</span> <span class="st">&quot;You just added a &quot;</span>, cell.cell_type, <span class="st">&quot;in this list.&quot;</span>
+        <span class="va">self</span>.size <span class="op">+=</span> <span class="dv">1</span>
+        <span class="bu">print</span> <span class="st">&quot;The number of cells is now&quot;</span>, <span class="va">self</span>.size</code></pre></div>
+</div>
+<div id="reading-and-writing-files" class="slide section level1">
+<h1>Reading and writing files</h1>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">f <span class="op">=</span> <span class="bu">open</span>(<span class="st">&#39;example.txt&#39;</span>, <span class="st">&#39;r+&#39;</span>)   <span class="co"># open a file</span>
+a <span class="op">=</span> f.read()
+new_a <span class="op">=</span> a.replace(<span class="st">&#39;butt&#39;</span>, <span class="st">&#39;ass&#39;</span>)
+f.write(new_a)
+f.close()                       <span class="co"># and close it.</span></code></pre></div>
+<p><strong>Mode strings</strong></p>
+<ul>
+<li>'r' : reading only</li>
+<li>'w' : writing (an existing file will be erased)</li>
+<li>'r+' : reading and writing</li>
+<li>'a' : appending</li>
+<li>Nothing: the same as 'r'</li>
+</ul>
+</div>
+<div id="resources" class="slide section level1">
+<h2>Useful resources</h2>
+<ul>
+    <li>http://python.net/~goodger/projects/pycon/2007/idiomatic/handout.html</li>
+    <li>https://people.duke.edu/~ccc14/sta-663/</li>
+</ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Sungho Hong (De Schutter unit)" />
+  <title>NEURON tutorial Part 1</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" type="text/css" media="screen, projection, print"
+    href="http://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css" />
+  <script src="http://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js"
+    charset="utf-8" type="text/javascript"></script>
+</head>
+<body>
+<div class="slide titlepage">
+  <h1 class="title">NEURON tutorial part 1</h1>
+  <p class="author">
+Sungho Hong (De Schutter unit, OIST)
+  </p>
+  <p class="date">Computational Neuroscience Course A310, 2016/2017.</p>
+</div>
+<div id="using-neuron-with-python" class="slide section level1">
+<h1>Using NEURON with python</h1>
+<h2 id="installation">Installation</h2>
+<ul>
+<li>http://www.neuron.yale.edu/neuron/download</li>
+</ul>
+<pre><code>nrngui -python
+
+NEURON -- Release 7.3 (993:1362d7b5726b) 2014-01-02
+Duke, Yale, and the BlueBrain Project -- Copyright 1984-2014
+See http://www.neuron.yale.edu/neuron/credits
+
+&gt;&gt;&gt;</code></pre>
+<h2 id="how-to-get-help">How to get help</h2>
+<ul>
+<li>http://www.neuron.yale.edu/neuron/docs</li>
+<li>http://www.neuron.yale.edu/neuron/static/new_doc/index.html</li>
+<li>NEURON forum: http://www.neuron.yale.edu/phpBB/</li>
+</ul>
+</div>
+<div id="morphology---sections" class="slide section level1">
+<h1>Morphology - Sections</h1>
+<p>In NEURON, all the neurons are composed of cylindrical cables called sections.</p>
+<pre><code>from neuron import h, gui
+
+soma = h.Section(name=&#39;soma&#39;)
+h.psection(sec=soma) # you can examine a section.</code></pre>
+<p>Sections can be connected to form trees.</p>
+<pre><code>dend = [h.Section(name=&quot;dend1&quot;), h.Section(name=&quot;dend2&quot;)]
+dend[0].connect(soma, 1, 0)
+dend[1].connect(soma, 1, 0)</code></pre>
+<p>The last two lines can be also written as</p>
+<pre><code>for d in dend:
+    d.connect(soma, 1, 0)</code></pre>
+<p>(Note the use of the relative coordinate)</p>
+</div>
+<div id="morphology---geometry-of-sections" class="slide section level1">
+<h1>Morphology - Geometry of sections</h1>
+<p>The most basic geometric parameters are diameter (<code>diam</code>) and length (<code>L</code>). <code>nseg</code> specifies how many segments will be used for accuracy.</p>
+<pre><code>soma.diam, soma.L = 10, 10
+for d in dend:
+    d.diam, d.L, d.nseg = 1.5, 30, 10</code></pre>
+<p>NOTE: The unit is <strong>micron</strong>.</p>
+</div>
+<div id="distributed-membrane-mechanisms" class="slide section level1">
+<h1>Distributed membrane mechanisms</h1>
+<p>The distributed membrane mechanisms such as the current given membrane voltage are inserted as</p>
+<pre><code>soma.insert(&#39;hh&#39;)
+for d in dend:
+    d.insert(&#39;pas&#39;)</code></pre>
+<p>You can access the parameters of each mechanism as <code>(compartment name).(parameter name)_(mechanism name)</code>. For example, we can change the conductance density of the Na<sup>+</sup> current:</p>
+<pre><code>soma.gnabar_hh = 0.3</code></pre>
+<p>NOTE: The unit is <strong>S/cm<sup>2</sup></strong>.</p>
+</div>
+<div id="default-units-in-neuron" class="slide section level1">
+<h1>Default units in NEURON</h1>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Quantity</th>
+<th align="left">Unit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Time</td>
+<td align="left">ms</td>
+</tr>
+<tr class="even">
+<td align="left">Voltage</td>
+<td align="left">mV</td>
+</tr>
+<tr class="odd">
+<td align="left">Current density (distributed)</td>
+<td align="left">mA/cm2</td>
+</tr>
+<tr class="even">
+<td align="left">Current (point process)</td>
+<td align="left">nA</td>
+</tr>
+<tr class="odd">
+<td align="left">Concentration</td>
+<td align="left">mM</td>
+</tr>
+<tr class="even">
+<td align="left">Specific capacitance</td>
+<td align="left">uF/cm2</td>
+</tr>
+<tr class="odd">
+<td align="left">Length</td>
+<td align="left">um</td>
+</tr>
+<tr class="even">
+<td align="left">Conductance density (distributed)</td>
+<td align="left">S/cm<sup>2</sup></td>
+</tr>
+<tr class="odd">
+<td align="left">Conductance (point process)</td>
+<td align="left">uS</td>
+</tr>
+<tr class="even">
+<td align="left">Axial resistance</td>
+<td align="left">ohm cm</td>
+</tr>
+<tr class="odd">
+<td align="left">Resistance</td>
+<td align="left">Mohm</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="point-processes---iclamp" class="slide section level1">
+<h1>Point processes - IClamp</h1>
+<p><code>IClamp</code> lets you inject the current in a cell directly.</p>
+<pre><code>ic = h.IClamp(0.5, sec=soma)
+ic.delay = 20  # delay before injection
+ic.amp = 0.01   # amplitude
+ic.dur = 50    # duration</code></pre>
+</div>
+<div id="running-a-simulation" class="slide section level1">
+<h1>Running a simulation</h1>
+<pre><code>h.tstop = 200   # set how long it will run
+
+h.init()
+h.run()</code></pre>
+</div>
+<div id="saving-and-retrieving-sessions" class="slide section level1">
+<h1>Saving and retrieving sessions</h1>
+<p>You can use save your interactive session via 'File -&gt; save session' and retrieve it later by</p>
+<pre><code>h.xopen(&#39;my_session.ses&#39;)</code></pre>
+</div>
+<div id="recording-data" class="slide section level1">
+<h1>Recording data</h1>
+<p><code>Vector</code> is a data structure used for recording simulation results.</p>
+<pre><code>vsoma = h.Vector()
+vsoma.record(soma(0.5)._ref_v, 0.1)</code></pre>
+<p>If you run a simulation after this, the data will be recorded in <code>vsoma</code> at 10 kHz.</p>
+<p>To save the data, use a function <code>CNSsaveVectors</code> in <code>CNSutils.hoc</code> that we provide.</p>
+<pre><code>h.load_file(&quot;CNSutils.hoc&quot;)
+h.CNSsaveVectors(&quot;cell1_volt.csv&quot;, Dt, vsoma)</code></pre>
+</div>
+</body>
+</html>
