@@ -12,7 +12,7 @@
    docker pull shhongoist/headless-vnc-neuron
    ```
 
-5. Download start.sh (or start.ps in Windows) and run it by
+5. Download [start.sh](https://raw.githubusercontent.com/shhong/a310_cns_2017/master/docker_instruction_scripts/start.sh) (or [start.ps1](https://raw.githubusercontent.com/shhong/a310_cns_2017/master/docker_instruction_scripts/start.ps1) in Windows) and run it by
 
    ~~~shell
    ./start
