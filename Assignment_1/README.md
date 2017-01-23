@@ -1,12 +1,12 @@
-# Assignment 1
+## Assignment 1
 
 ### 1. Simple cable
 We prepared a simulation `axon_model.py` that simulates the following axon
 
-a. Diameter (`diam`) = 1 um and length (`L`) = 10<sup>3</sup> um,
-b. Capacitance per area (`cm`) = 1 uF/cm<sup>2</sup>,
-c. Axial resistance (`Ra`) = 150 Ohm cm,
-d. Passive mechanism (`pas`) with the conductance per area = 5×10<sup>-5</sup> S/cm<sup>2</sup>.
+* Diameter (`diam`) = 1 um and length (`L`) = 10<sup>3</sup> um,
+* Capacitance per area (`cm`) = 1 uF/cm<sup>2</sup>,
+* Axial resistance (`Ra`) = 150 Ohm cm,
+* Passive mechanism (`pas`) with the conductance per area = 5×10<sup>-5</sup> S/cm<sup>2</sup>.
 
 This axon is attached a current injecting electrode at one end (`ic`) that injects 100 pA from t=100 ms.
 
