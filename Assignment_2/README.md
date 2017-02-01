@@ -17,14 +17,14 @@ We also provide a function `distance_from_soma` to calculate the distance of the
 
 Here you will work with `hw2_2.py`  that simulates two synapses, managed by two point process managers. Both synapses activate at _t_=50 ms, and both are set to excitatory ones (e = 0 mV).
 
-Run three simulations and record the EPSP traces at the soma: 1) Both synapses are active (EPSP~1+2~), 2) only the first synapse is active (gmax = 0 for the second synapse; EPSP~1~), 3) only the second synapse is active (EPSP~2~). Check if linear summation (approximately) holds, i.e., EPSP~1+2~ ≈ EPSP~1~ + EPSP~2~ . By moving two synapses around, find out in which situation the the summation is approximately linear or not.
+Run three simulations and record the EPSP traces at the soma: 1) Both synapses are active (EPSP<sub>1+2</sub>), 2) only the first synapse is active (gmax = 0 for the second synapse; EPSP<sub>1</sub>), 3) only the second synapse is active (EPSP<sub>2</sub>). Check if linear summation (approximately) holds, i.e., EPSP<sub>1+2</sub> ≈ EPSP<sub>1</sub> + EPSP<sub>2</sub> . By moving two synapses around, find out in which situation the the summation is approximately linear or not.
 
 **Note:** Before you run simulations, make sure that you properly rescale synaptic conductances (as you did in "Synaptic scaling") each time so that the EPSP sizes of two synapses are similar.
 
 
 ### 3. Effects of proximal and distal inhibition
 
-Here we ask you to reproduce a version of Fig 5.1 in the Koch for the transient synaptic inputs. Run `hw2_2.py`, but make one of the synapses inhibitory by changing the reversal potential to -76 mV (Note that this is the same as the resting membrane potential and threfore the synapse will deliver _shunting inhibition_). Also change `tau` and `onset` to 100 ms and 0 ms so that it should activate slowly like GABA~B~ synapses from the beginning of the simulation.
+Here we ask you to reproduce a version of Fig 5.1 in the Koch for the transient synaptic inputs. Run `hw2_2.py`, but make one of the synapses inhibitory by changing the reversal potential to -76 mV (Note that this is the same as the resting membrane potential and threfore the synapse will deliver _shunting inhibition_). Also change `tau` and `onset` to 100 ms and 0 ms so that it should activate slowly like GABA<sub>B</sub> synapses from the beginning of the simulation.
 
 1. __(Proximal inhibition)__ Place the excitatory synapse to a distal part of a basal dendrite and the inhibitory synapse close to soma. Run simulations with different conductance values, make a plot for the EPSP amplitude as Fig. 5.1A.
 2. __(Distal inhibition)__ Now move the inhibitory synapse also to a distal part in the _same dendrite_ as the excitatory synapse, and make a plot as 1 (i.e., Fig. 5.1B).
