@@ -1,0 +1,48 @@
+/*
+CNSutils.hoc
+
+version 1.1
+
+A collection of utility functinons for A310 course
+
+(c) Copyright 2014 Sungho Hong, CNS unit, OIST. All Rights Reserved. 
+
+*/
+
+//
+func CNSsaveVectors() { local i, j localobj f
+    f = new File()
+    f.wopen($s1)
+    for j=1, $o3.size {
+        f.printf("%.12f", (j-1)*$2)
+        for i=3,numarg() f.printf(",%.12f",$oi.x[j-1])
+        f.printf("\n")
+    }
+    f.close()
+    return 0
+}
+
+func CNSsaveListOfVectors() { local i, j localobj f
+    f = new File()
+    f.wopen($s1)
+    for i=1,$o3.o(0).size {
+        f.printf("%.12f", (i-1)*$2)
+        for j=1,$o3.count() f.printf(",%.12f",$o3.o(j-1).x[i-1])
+        f.printf("\n")
+    }
+    f.close()
+    return 0
+}
+
+func count_spikes() { localobj spikes, spiketimes
+    spikes = new Vector()
+    spikes.spikebin($o1, $3)
+    spiketimes = spikes.indvwhere("==", 1)
+    spiketimes.mul($2)
+    spiketimes = spiketimes.c.where(">=", $4)
+    spiketimes = spiketimes.c.where("<=", $5)
+    // for i=1,spiketimes.size print spiketimes.x[i-1]
+    // return 0
+    return spiketimes.size
+}
+
