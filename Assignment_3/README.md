@@ -1,5 +1,7 @@
 # Assignment 3
 
+**To complile mod files (`*.mod`), run `nrnivmodl` in the directory where the mod files are. Also run your simulations in this directory.**
+
 ### 1. f-I curves
 
 Here we reproduce Fig. 7.2 and 7.6 in Rinzel and Ermentrout.
