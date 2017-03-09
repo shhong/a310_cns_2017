@@ -82,6 +82,7 @@ vtemp.record(soma(0.5)._ref_v, Dt)
 
 spiketime = h.Vector()
 spike_recorder = h.APCount(0.5, sec=soma)
+spike_recorder.thresh = -50
 spike_recorder.record(spiketime)
 
 h.v_init = -70
