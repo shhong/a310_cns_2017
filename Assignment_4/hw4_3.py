@@ -82,7 +82,7 @@ exc_cells = cells[:Nexc]         # Make references to two groups
 inh_cells = cells[Nexc:]
 
 # Define synaptic conductances
-gexc = 1.5e-3   # g_exc = 1.5 pS
+gexc = 1.5e-3   # g_exc = 1.5 nS
 ginh = 6.2*gexc   # g_inh = 6.2 g_exc
 
 # Wire neurons
