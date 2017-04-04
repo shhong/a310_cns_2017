@@ -71,7 +71,7 @@ stims[0].seed(1) # Set seed for noise
 ncs = []
 for i in range(Nexc):
     ncs.append(h.NetCon(stims[i], syns[0]))
-    ncs[-1].weight[0] = 1e-3
+    ncs[-1].weight[0] = 1e-3    # 1 nS
 
 for i in range(Ninh):
     ncs.append(h.NetCon(stims[i+Nexc], syns[1]))
